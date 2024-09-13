@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load thumbnail jalali_tags %} 
 {% load thumbnail %}
 {% block content %}
 <div class="main-content">
@@ -14,7 +15,7 @@
   <!-- News Detail -->
   <article>
       <h1>{{ news.title }}</h1>
-      <p><strong>تاریخ انتشار:</strong> ۲۰۲۴-۰۸-۱۰ | <strong>زمان انتشار:</strong> ۱۴:۳۰</p>
+      <p><strong>تاریخ انتشار:</strong> {{ news.publish_datetime|to_jalali:'%Y/%m/%d' }} <strong>زمان انتشار:</strong> {{ news.publish_datetime|to_jalali:' %H:%M' }}</p>
       <p><strong>نویسنده:</strong> <a href="#">نویسنده ۱</a></p>
       <a href="{% url "app_news:news-detail" news.id %}">
         {% if news.top_image %}

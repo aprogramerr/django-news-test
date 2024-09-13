@@ -22,5 +22,6 @@ app_name = 'app_news'
 
 urlpatterns = [
     path('', views.index),
-    path('news/<str:id>/', views.news, name='news-detail')
+    path('news/<str:id>/', views.news, name='news-detail'),
+    path('author/<str:id>/', views.author, name='news-author'),
 ]

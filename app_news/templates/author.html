@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">خانه</a></li>
+                <li class="breadcrumb-item"><a href="#">نویسندگان</a></li>
+                <li class="breadcrumb-item active" aria-current="page">پروفایل نویسنده</li>
+            </ol>
+        </nav>
+
+        <!-- Author Profile -->
+        <div class="text-center">
+            <img src="https://via.placeholder.com/150" alt="تصویر نویسنده" class="author-photo">
+            <h2>{{auther.get_full_name }} </h2>
+        </div>
+
+        <!-- Articles List -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>مقالات نویسنده</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group mb-3">
+                    <!-- Article 1 -->
+                    <li class="list-group-item">
+                        <h6>عنوان مقاله اول</h6>
+                        <p><small>تاریخ انتشار: ۲۰۲۴-۰۸-۰۹ | دسته‌بندی: <a href="#">تکنولوژی</a></small></p>
+                    </li>
+                    <!-- Article 2 -->
+                    <li class="list-group-item">
+                        <h6>عنوان مقاله دوم</h6>
+                        <p><small>تاریخ انتشار: ۲۰۲۴-۰۸-۰۸ | دسته‌بندی: <a href="#">سلامت</a></small></p>
+                    </li>
+                    <!-- Article 3 -->
+                    <li class="list-group-item">
+                        <h6>عنوان مقاله سوم</h6>
+                        <p><small>تاریخ انتشار: ۲۰۲۴-۰۸-۰۷ | دسته‌بندی: <a href="#">اقتصادی</a></small></p>
+                    </li>
+                </ul>
+                <!-- Pagination -->
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li class="page-item disabled">
+                            <span class="page-link">قبلی</span>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">۱</a></li>
+                        <li class="page-item"><a class="page-link" href="#">۲</a></li>
+                        <li class="page-item"><a class="page-link" href="#">۳</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">بعدی</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Comments List -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5>نظرات</h5>
+            </div>
+            <div class="card-body">
+                <!-- Comment 1 -->
+                <div class="media mb-3">
+                    <img src="https://via.placeholder.com/50" class="mr-3" alt="تصویر کاربر">
+                    <div class="media-body">
+                        <h6 class="mt-0">کاربر ۱</h6>
+                        <p>نظر اول: مقاله بسیار مفید و آموزنده بود.</p>
+                    </div>
+                </div>
+                <!-- Comment 2 -->
+                <div class="media mb-3">
+                    <img src="https://via.placeholder.com/50" class="mr-3" alt="تصویر کاربر">
+                    <div class="media-body">
+                        <h6 class="mt-0">کاربر ۲</h6>
+                        <p>نظر دوم: اطلاعات ارائه شده در مقاله بسیار کامل بود.</p>
+                    </div>
+                </div>
+                <!-- Comment 3 -->
+                <div class="media mb-3">
+                    <img src="https://via.placeholder.com/50" class="mr-3" alt="تصویر کاربر">
+                    <div class="media-body">
+                        <h6 class="mt-0">کاربر ۳</h6>
+                        <p>نظر سوم: نیاز به توضیحات بیشتر دارد.</p>
+                    </div>
+                </div>
+                <!-- Pagination -->
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li class="page-item disabled">
+                            <span class="page-link">قبلی</span>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">۱</a></li>
+                        <li class="page-item"><a class="page-link" href="#">۲</a></li>
+                        <li class="page-item"><a class="page-link" href="#">۳</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#">بعدی</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+content{% endblock content %}
