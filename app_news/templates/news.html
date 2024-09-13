@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load thumbnail %}
+{% block content %}
+<div class="main-content">
+  <!-- Breadcrumbs -->
+  <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">خانه</a></li>
+          <li class="breadcrumb-item"><a href="#">تکنولوژی</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{{ news.title }}</li>
+      </ol>
+  </nav>
+
+  <!-- News Detail -->
+  <article>
+      <h1>{{ news.title }}</h1>
+      <p><strong>تاریخ انتشار:</strong> ۲۰۲۴-۰۸-۱۰ | <strong>زمان انتشار:</strong> ۱۴:۳۰</p>
+      <p><strong>نویسنده:</strong> <a href="#">نویسنده ۱</a></p>
+      <a href="{% url "app_news:news-detail" news.id %}">
+        {% if news.top_image %}
+        <picture>
+          <!-- تصویر برای موبایل -->
+          {% thumbnail news.top_image "480x320" crop="center" as mobile %}
+          <source srcset="{{ mobile.url }}" media="(max-width: 480px)" />
+          {% endthumbnail %}
+
+          <!-- تصویر برای تبلت -->
+          {% thumbnail news.top_image "768x512" crop="center" as tablet %}
+          <source
+            srcset="{{ tablet.url }}"
+            media="(min-width: 481px) and (max-width: 768px)"
+          />
+          {% endthumbnail %}
+
+          <!-- تصویر برای لپتاپ -->
+          {% thumbnail news.top_image "1024x683" crop="center" as laptop %}
+          <source srcset="{{ laptop.url }}" media="(min-width: 769px)" />
+          {% endthumbnail %}
+
+          <!-- تصویر پیش‌فرض برای زمانی که تگ‌های <source> پشتیبانی نشوند -->
+          <img
+            src="{{ laptop.url }}"
+            width="{{ laptop.width }}"
+            height="{{ laptop.height }}"
+            alt="{{ news.title }}"
+            class="img-fluid mx-auto d-block rounded mb-4"
+          />
+        </picture>
+        {% else %}
+        <img
+          src="https://via.placeholder.com/800x400"
+          class="card-img-top"
+          alt="{{ news.title }}"
+        />
+        {% endif %}
+      </a>
+
+      <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. این متن به‌عنوان متن آزمایشی در صنعت چاپ و طراحی استفاده می‌شود و به‌عنوان استاندارد در این زمینه مورد استفاده قرار می‌گیرد. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. این متن به‌عنوان متن آزمایشی در صنعت چاپ و طراحی استفاده می‌شود و به‌عنوان استاندارد در این زمینه مورد استفاده قرار می‌گیرد.</p>
+      <p>این متن به‌عنوان متن آزمایشی در صنعت چاپ و طراحی استفاده می‌شود و به‌عنوان استاندارد در این زمینه مورد استفاده قرار می‌گیرد. لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. این متن به‌عنوان متن آزمایشی در صنعت چاپ و طراحی استفاده می‌شود و به‌عنوان استاندارد در این زمینه مورد استفاده قرار می‌گیرد.</p>
+      <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. این متن به‌عنوان متن آزمایشی در صنعت چاپ و طراحی استفاده می‌شود و به‌عنوان استاندارد در این زمینه مورد استفاده قرار می‌گیرد.</p>
+  </article>
+
+  <!-- Comments Section -->
+  <div class="card mb-4">
+      <div class="card-header">
+          <h5>نظرات</h5>
+      </div>
+      <div class="card-body">
+          <!-- Comment 1 -->
+          <div class="comment-card">
+              <div class="media">
+                  <img src="https://via.placeholder.com/50x50" class="mr-3" alt="تصویر کاربر">
+                  <div class="media-body">
+                      <h6 class="mt-0">کاربر ۱</h6>
+                      <p>نظر اول: این مقاله بسیار مفید و آموزنده بود. ممنون از نویسنده.</p>
+                  </div>
+              </div>
+          </div>
+          <!-- Comment 2 -->
+          <div class="comment-card">
+              <div class="media">
+                  <img src="https://via.placeholder.com/50x50" class="mr-3" alt="تصویر کاربر">
+                  <div class="media-body">
+                      <h6 class="mt-0">کاربر ۲</h6>
+                      <p>نظر دوم: اطلاعات ارائه شده در این مقاله کامل و جامع است. خیلی خوب بود.</p>
+                  </div>
+              </div>
+          </div>
+          <!-- Comment 3 -->
+          <div class="comment-card">
+              <div class="media">
+                  <img src="https://via.placeholder.com/50x50" class="mr-3" alt="تصویر کاربر">
+                  <div class="media-body">
+                      <h6 class="mt-0">کاربر ۳</h6>
+                      <p>نظر سوم: این مقاله نقاط قوت زیادی دارد، اما نیاز به توضیحات بیشتر دارد.</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- Comment Form -->
+  <div class="card mb-4">
+      <div class="card-header">
+          <h5>ثبت نظر</h5>
+      </div>
+      <div class="card-body">
+          <form>
+              <div class="form-group">
+                  <label for="comment-name">نام</label>
+                  <input type="text" class="form-control" id="comment-name" placeholder="نام خود را وارد کنید">
+              </div>
+              <div class="form-group">
+                  <label for="comment-email">ایمیل</label>
+                  <input type="email" class="form-control" id="comment-email" placeholder="ایمیل خود را وارد کنید">
+              </div>
+              <div class="form-group">
+                  <label for="comment-text">نظر</label>
+                  <textarea class="form-control" id="comment-text" rows="3" placeholder="نظر خود را بنویسید"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">ثبت نظر</button>
+          </form>
+      </div>
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,113 @@
+{% extends "base.html" %} {% load thumbnail jalali_tags %} {% block content %}
+<div class="container mt-5">
+  <div class="row">
+    <!-- Main News -->
+    <div class="col-md-8">
+      {% for news in news_list %}
+      <div class="card mb-4">
+        <a href="{% url "app_news:news-detail" news.id %}">
+        {% if news.top_image %}
+        <picture>
+          <!-- تصویر برای موبایل -->
+          {% thumbnail news.top_image "480x320" crop="center" as mobile %}
+          <source srcset="{{ mobile.url }}" media="(max-width: 480px)" />
+          {% endthumbnail %}
+
+          <!-- تصویر برای تبلت -->
+          {% thumbnail news.top_image "768x512" crop="center" as tablet %}
+          <source
+            srcset="{{ tablet.url }}"
+            media="(min-width: 481px) and (max-width: 768px)"
+          />
+          {% endthumbnail %}
+
+          <!-- تصویر برای لپتاپ -->
+          {% thumbnail news.top_image "1024x683" crop="center" as laptop %}
+          <source srcset="{{ laptop.url }}" media="(min-width: 769px)" />
+          {% endthumbnail %}
+
+          <!-- تصویر پیش‌فرض برای زمانی که تگ‌های <source> پشتیبانی نشوند -->
+          <img
+            src="{{ laptop.url }}"
+            width="{{ laptop.width }}"
+            height="{{ laptop.height }}"
+            alt="{{ news.title }}"
+            class="img-fluid"
+          />
+        </picture>
+        {% else %}
+        <img
+          src="https://via.placeholder.com/800x400"
+          class="card-img-top"
+          alt="{{ news.title }}"
+        />
+        {% endif %}
+        </a>
+        <div class="card-body">
+          <a href="{% url "app_news:news-detail" news.id %}">
+            <h5 class="card-title">{{ news.title }}</h5>
+          </a>
+          <p class="card-text">{{ news.description|truncatechars:100 }}</p>
+          <a href="{% url "app_news:news-detail" news.id %}" class="btn btn-primary">ادامه مطلب</a>
+        </div>
+        <div class="card-footer text-muted">
+          <small>{{ news.publish_datetime|to_jalali:'%Y/%m/%d %H:%M' }}</small><br />
+          <small>دسته‌بندی: <a href="#">تکنولوژی</a></small
+          ><br />
+          <small>نویسنده: <a href="#">نویسنده ۱</a></small>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">آخرین اخبار</h5>
+          <ul class="list-unstyled">
+            {% for news in last_news %}
+              <li><a href="{% url "app_news:news-detail" news.id %}">{{ news.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">بج ها</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">سیاسی</a></li>
+            <li><a href="#">اقتصادی</a></li>
+            <li><a href="#">فرهنگی</a></li>
+            <li><a href="#">ورزشی</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">پیوندها</h5>
+          <ul class="list-unstyled">
+            <li><a href="#">لینک ۱</a></li>
+            <li><a href="#">لینک ۲</a></li>
+            <li><a href="#">لینک ۳</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">نویسنده‌های برتر</h5>
+          <ul class="list-unstyled">
+            <li>نویسنده ۱ (۱۰ مقاله)</li>
+            <li>نویسنده ۲ (۸ مقاله)</li>
+            <li>نویسنده ۳ (۷ مقاله)</li>
+            <li>نویسنده ۴ (۵ مقاله)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
