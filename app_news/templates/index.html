@@ -5,7 +5,7 @@
     <div class="col-md-8">
       {% for news in page_obj %}
       <div class="card mb-4">
-        <a href="{% url "app_news:news-detail" news.id %}">
+        <a href="{% url 'app_news:news-detail' news.id %}">
         {% if news.top_image %}
         <picture>
           <!-- تصویر برای موبایل -->
@@ -44,11 +44,11 @@
         {% endif %}
         </a>
         <div class="card-body">
-          <a href="{% url "app_news:news-detail" news.id %}">
+          <a href="{% url 'app_news:news-detail' news.id %}">
             <h5 class="card-title">{{ news.title }}</h5>
           </a>
           <p class="card-text">{{ news.description|truncatechars:100 }}</p>
-          <a href="{% url "app_news:news-detail" news.id %}" class="btn btn-primary">ادامه مطلب</a>
+          <a href="{% url 'app_news:news-detail' news.id %}" class="btn btn-primary">ادامه مطلب</a>
         </div>
         <div class="card-footer text-muted">
           <small>{{ news.publish_datetime|to_jalali:'%Y/%m/%d %H:%M' }}</small><br />
@@ -83,7 +83,7 @@
           <h5 class="card-title">آخرین اخبار</h5>
           <ul class="list-unstyled">
             {% for news in last_news %}
-              <li><a href="{% url "app_news:news-detail" news.id %}">{{ news.title }}</a></li>
+              <li><a href="{% url 'app_news:news-detail' news.id %}">{{ news.title }}</a></li>
             {% endfor %}
           </ul>
         </div>
