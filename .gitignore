@@ -265,6 +265,6 @@ pyrightconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/django,python
 cache
-management
+# management
 avatar
 news
