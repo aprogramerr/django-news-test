@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load thumbnail jalali_tags%}
 {% block content %}
 
     <!-- Main Content -->
@@ -14,8 +15,40 @@
 
         <!-- Author Profile -->
         <div class="text-center">
-            <img src="https://via.placeholder.com/150" alt="تصویر نویسنده" class="author-photo">
-            <h2>{{auther.get_full_name }} </h2>
+            {% if author.profile.avatar %}
+                <picture>
+                    <!-- تصویر برای موبایل -->
+                    {% thumbnail author.profile.avatar "75x75" crop="center" as mobile %}
+                    <source srcset="{{ mobile.url }}" media="(max-width: 480px)" />
+                    {% endthumbnail %}
+
+                    <!-- تصویر برای تبلت -->
+                    {% thumbnail author.profile.avatar "150x150" crop="center" as tablet %}
+                    <source
+                        srcset="{{ tablet.url }}"
+                        media="(min-width: 481px) and (max-width: 768px)"
+                    />
+                    {% endthumbnail %}
+
+                    <!-- تصویر برای لپتاپ -->
+                    {% thumbnail author.profile.avatar "250x250" crop="center" as laptop %}
+                    <source srcset="{{ laptop.url }}" media="(min-width: 769px)" />
+                    {% endthumbnail %}
+
+                    <!-- تصویر پیش‌فرض برای زمانی که تگ‌های <source> پشتیبانی نشوند -->
+                    <img
+                        src="{{ laptop.url }}"
+                        width="{{ laptop.width }}"
+                        height="{{ laptop.height }}"
+                        alt="{{ user.get_full_name }}"
+                        class="author-photo"
+                    />
+                </picture>
+            {% else %}
+                <img
+                src="https://via.placeholder.com/150" class="author-photo" alt="{{ user.get_full_name }}" />
+            {% endif %}
+            <h2>{{author.get_full_name }} </h2>
         </div>
 
         <!-- Articles List -->
@@ -25,21 +58,13 @@
             </div>
             <div class="card-body">
                 <ul class="list-group mb-3">
-                    <!-- Article 1 -->
+                    <!-- Articles  -->
+                    {% for news in author.news_set.all %}
                     <li class="list-group-item">
-                        <h6>عنوان مقاله اول</h6>
-                        <p><small>تاریخ انتشار: ۲۰۲۴-۰۸-۰۹ | دسته‌بندی: <a href="#">تکنولوژی</a></small></p>
+                        <h6>{{news.title}} </h6>
+                        <p><small>تاریخ انتشار:{{ news.publish_datetime|to_jalali:'%Y/%m/%d' }} | دسته‌بندی: <a href="#">تکنولوژی</a></small></p>
                     </li>
-                    <!-- Article 2 -->
-                    <li class="list-group-item">
-                        <h6>عنوان مقاله دوم</h6>
-                        <p><small>تاریخ انتشار: ۲۰۲۴-۰۸-۰۸ | دسته‌بندی: <a href="#">سلامت</a></small></p>
-                    </li>
-                    <!-- Article 3 -->
-                    <li class="list-group-item">
-                        <h6>عنوان مقاله سوم</h6>
-                        <p><small>تاریخ انتشار: ۲۰۲۴-۰۸-۰۷ | دسته‌بندی: <a href="#">اقتصادی</a></small></p>
-                    </li>
+                    {% endfor %}
                 </ul>
                 <!-- Pagination -->
                 <nav aria-label="Page navigation">

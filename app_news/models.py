@@ -12,7 +12,7 @@ STATUS_CHOICES = (
 )
 
 class News(models.Model):
-    aithor = models.ForeignKey( User , on_delete= models.CASCADE , null=True)
+    author = models.ForeignKey( User , on_delete= models.CASCADE , null=True)
     title = models.CharField(max_length=120)
     description = models.TextField(null=True)
     status = models.CharField(default='dr', choices=STATUS_CHOICES, max_length=2)
